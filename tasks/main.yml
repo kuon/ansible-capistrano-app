@@ -1,0 +1,21 @@
+- name: Create app user
+  user: name={{ app_user }}
+
+- name: Copy github deploy ssh key
+  copy: src={{ ssh_path }}/{{ item }} dest=/home/{{ deploy_user }}/.ssh/{{ item }} owner={{ deploy_user }} mode=600
+  with_items:
+  - '{{ app_name }}'
+  - '{{ app_name }}.pub'
+
+- name: Create shared directory
+  file: state=directory owner={{ deploy_user }} path={{ deploy_path }}/{{ app_name }}/shared
+
+- name: Copy environment
+  template: src=environment/{{ app_name }}.env dest={{ deploy_path }}/{{ app_name }}/shared/config.env owner={{ deploy_user }} mode=600
+
+- name: App Service file
+  template: src=capistrano-app.service dest=/etc/systemd/system/{{ app_name }}-{{ item }}.service
+  with_items: app_services
+
+- name: Reload service files
+  command: systemctl daemon-reload

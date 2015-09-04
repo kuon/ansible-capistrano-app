@@ -1,0 +1,26 @@
+[Unit]
+Description={{ app_name }} {{ item }}
+After=syslog.target network.target
+
+[Service]
+User={{ app_name }}
+
+SyslogIdentifier={{ app_name }}-{{ item }}
+Restart=always
+RestartSec=1
+
+TimeoutStartSec=0
+
+Environment=RBENV_ROOT={{ deploy_path }}/rbenv
+Environment=RBENV_VERSION={{ruby_version}}
+
+EnvironmentFile=-{{ deploy_path }}/{{ app_name }}/shared/config.env
+EnvironmentFile=-{{ deploy_path }}/{{ app_name }}/current/VERSION
+
+ExecStart={{ deploy_path }}/{{ app_name }}/current/bin/{{ item }}
+
+[Install]
+WantedBy=multi-user.target
+
+
+

@@ -1,0 +1,5 @@
+---
+deploy_user: deploy
+deploy_path: /srv/
+app_services:
+- web
