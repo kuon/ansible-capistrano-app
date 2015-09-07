@@ -1,5 +1,6 @@
 ---
 deploy_user: deploy
-deploy_path: /srv/
+deploy_path: /srv/apps
 app_services:
 - web
+rbenv_root: /srv/rbenv
