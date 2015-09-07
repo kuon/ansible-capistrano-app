@@ -12,6 +12,7 @@
 
 - name: Copy environment
   template: src=environment/{{ app_name }}.env dest={{ deploy_path }}/{{ app_name }}/shared/config.env owner={{ deploy_user }} mode=600
+  tags: capistrano-app.environment
 
 - name: App Service file
   template: src=capistrano-app.service.j2 dest=/etc/systemd/system/{{ app_name }}-{{ item }}.service
