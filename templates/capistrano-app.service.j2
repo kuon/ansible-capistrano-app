@@ -11,7 +11,7 @@ RestartSec=1
 
 TimeoutStartSec=0
 
-Environment=RBENV_ROOT={{ deploy_path }}/rbenv
+Environment=RBENV_ROOT={{ rbenv_root }}
 Environment=RBENV_VERSION={{ruby_version}}
 
 EnvironmentFile=-{{ deploy_path }}/{{ app_name }}/shared/config.env
