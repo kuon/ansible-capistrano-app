@@ -3,7 +3,7 @@ Description={{ app_name }} {{ item }}
 After=syslog.target network.target
 
 [Service]
-User={{ app_name }}
+User={{ app_user }}
 
 SyslogIdentifier={{ app_name }}-{{ item }}
 Restart=always
