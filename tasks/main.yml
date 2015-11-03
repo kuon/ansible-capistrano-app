@@ -16,7 +16,9 @@
 
 - name: App Service file
   template: src=capistrano-app.service.j2 dest=/etc/systemd/system/{{ app_name }}-{{ item }}.service
+  tags: capistrano-app.services
   with_items: app_services
 
 - name: Reload service files
   command: systemctl daemon-reload
+  tags: capistrano-app.services
